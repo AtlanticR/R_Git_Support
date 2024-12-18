@@ -1,0 +1,70 @@
+---
+title: "Downloading Oceanographic Data from ERDDAP"
+author: "Your Name"
+date: "2024-12-18"
+output: html_document
+---
+
+## Introduction
+
+In this example, we will use the `rerddap` package to download and analyze oceanographic data from an ERDDAP server. ERDDAP is a data server that provides a simple, consistent way to download subsets of scientific datasets.
+
+## Setup
+
+First, we need to install and load the necessary packages:
+
+```{r setup, include=FALSE}
+# Install rerddap if not already installed
+if (!requireNamespace("rerddap", quietly = TRUE)) {
+  install.packages("rerddap")
+}
+library(tidyverse)
+library(rerddap)
+library(ggplot2)
+library(cmocean)
+```
+
+## Downloading data
+
+We will download sea surface temperature (SST) data from the NOAA ERDDAP server. The dataset ID for this example is erdMBsstdmday.
+
+```{r download-data}
+# Define the dataset ID and the time range
+dataset_id <- "erdMBsstdmday"
+time_range <- c("2023-01-01", "2023-06-31")
+
+# Use the griddap function to download the data
+sst_data <- griddap(
+  datasetx = dataset_id,
+  time = time_range,
+  latitude = c(30, 40),
+  longitude = c(130, 120),
+  fields = "sst"
+)
+
+# Display the structure of the downloaded data
+str(sst_data$data)
+```
+
+## Visualizing Data
+
+Next, we will visualize the downloaded SST data using ggplot2.
+
+```{r visualize-data}
+# Convert the data to a data frame
+sst_df <- as.data.frame(sst_data$data)
+
+# average by month
+sst_df <- sst_df %>%
+  dplyr::mutate(month = format(as.POSIXct(sst_df$time), '%m')) %>%
+  dplyr::group_by(month) %>%
+  dplyr::summarise(monthly_avg_sst = mean(sst, na.rm = TRUE))
+
+# Plot the SST data
+ggplot(sst_df, aes(x = month, y = monthly_avg_sst)) +
+  geom_col( ) +
+  labs(title = "Monthly Average Sea Surface Temperature (SST)",
+       x = "Month",
+       y = "SST [deg C]") +
+  theme_minimal()
+```
