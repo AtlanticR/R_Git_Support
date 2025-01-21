@@ -1,0 +1,191 @@
+---
+title: "Asking for help"
+author: "Emily O'Grady"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+This is a session designed to help you ask for help, in a consistent and efficient way that
+will facilitate better discussion and faster solutions. It is designed for Science
+staff, but could be relevant to a broader audience. 
+
+Everyone experiences issues and bugs when navigating and developing code. The most 
+important tool you can have is the ability to ask for help. This session will cover
+the best practices for asking for help, and how to engage with AI to get the best
+results.
+
+# Platforms
+
+Where to go when you run into a problem? Here are some of the most popular platforms
+for asking for help:
+
+- Stack Overflow (https://stackoverflow.com/)
+  Usually the first thing to come up in your google searches. It is a forum for devlopers to ask
+  and answer questions. It is a great resource for finding solutions to common problems.
+  Use with some caution, as solutions may not always be the best practice and there may be nuances 
+  to your problem, due to the security of your DFO laptop.
+- GitHub (https:://github.com)
+  A great place to find code and packages which may help with your work. On 
+  individual packages, the 'issues' boards can be a great place to ask for
+  help with a niche problem with a particular library.
+- AI (https:://m365.cloud.microsoft/chat)
+  There are a number of AI tools which can help you debug your code. These are
+  great for getting a quick solution to a problem, but may not always be the best
+  practice. The recommended tool for DFO users is Bing AI (Copilot). Github copilot
+  is also now available and can be used in most IDEs. 
+- DFO channels
+  The Science PL community channel on Teams is active and a great place to go with 
+  questions that may have specific DFO nuances, issues with our internal databases
+  or other problems that involve coordination with IT. 
+
+
+# Making a reproducible example
+
+A reproducible example is key to helping someone understand your problem. 
+This will allow someone else to run your code, and troubleshoot it in their own environment. 
+It makes it much easier to get a clear answer to your problem.
+
+Here are some references:
+https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example
+https://stackoverflow.com/help/minimal-reproducible-example
+
+Let's walk through some functions that can be helpful in generating a reproducible example.
+
+Particularly if you cannot share your data. 
+
+```{r}
+# generate a random dataframe
+df <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100)
+)
+
+# grab an example dataset
+data(mtcars)
+
+# grab an example oceanographic dataset
+library(ocedata)
+?ocedata
+# challenge: find a dataset that could represent data used in your work
+# data()
+
+```
+The next step in making a reproducible example is to isolate and simplify your code.
+This will help you identify the problem, and make it easier for someone else to help you.
+You should be including the code as well as your expected output, and the actual output.
+
+
+
+# Getting details
+
+Sometime people will need more details to help you! Here are some things you can include:
+
+- SessionInfo()
+  This will show which version of R you are using, and which packages are loaded.
+  
+- browser()
+  This will pause your code at a certain point, and allow you to inspect the variables at that point.
+  
+  For example:
+  
+```{r}
+  df <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100)
+)
+
+  for (i in seq_along(df$x)) {
+    if (df$x[i] < 0) {
+      browser()
+    }
+    print(df$x[i])
+  }
+```
+  
+- print statements and logs
+  You can use print statements to see what is happening at a certain point in your code.
+  You can also write logs to a file, to see what is happening over time.
+  
+  For example:
+  
+```{r}
+ df <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100)
+)
+
+  for (i in seq_along(df$x)) {
+    if (df$x[i] < 0) {
+      print(paste('Value is less than zero! (i = ', i, ')'))
+      browser()
+    }
+    print(df$x[i])
+  }
+
+```
+
+# Tips for engaging with AI
+- Be specific.
+- Use code snippets. This will help the AI understand your problem, and is as easy as copy-paste!
+- Narrow your libraries, if you would like the answer to only include specific libraries
+- Copy the error message from your console
+- Give it solution ideas or direction. Sometimes prompting can help
+  jumpstart solutions
+- Explain your data, outline columns names and data types
+- Ask solutions to follow 'best practices'
+
+
+https://octawebtools.com/mastering-chatgpt-for-coding-tips-tricks-and-detailed-examples/
+https://medium.com/@pranshu1902/code-debugging-made-easy-with-chatgpt-your-personal-debugging-assistant-c9f1adc054c8
+https://rollbar.com/blog/how-to-debug-code-using-chatgpt/
+https://www.cyfrin.io/blog/ai-code-debugger-debug-code-with-ai
+
+
+
+# Cheat sheets
+
+Cheat Sheets can be a great quick reference to help you with your coding
+on a day to day basis. Here are some of the most popular cheat sheets for R:
+
+cmocean colormaps: https://www.researchgate.net/figure/Colormaps-available-in-the-cmocean-package_fig2_307517997
+posit: https://rstudio.github.io/cheatsheets/
+base graphics: https://publish.illinois.edu/johnrgallagher/files/2015/10/BaseGraphicsCheatsheet.pdf
+base R: https://geomoer.github.io/moer-base-r/cheatsheet.html
+r for ecology: https://www.rforecology.com/post/the-essential-functions-of-r-cheatsheet/
+
+# Example
+
+This code is not working. Can you help me debug it?
+
+The goal is to find locations which were samples more than twice and 
+then generate a mean of all measurements for that station. We then want to plot
+only stations where the mean depth is greater than 5.
+
+```{r}
+library(tidyverse)
+data(secchi)
+
+# find locations which were sampled more than twice
+stations <- secchi %>%
+  group_by(c(latitude, longitude)) %>%
+  filter(n > 2) %>%
+  summarise(mean = mean(depth))
+
+# filter lat and lon data where the mean is greater than 5
+stations <- stations %>%
+  filter(mean > 5)
+
+# name the stations with unique IDs
+stations$station <- seq_along(stations$latitude)
+
+# plot
+ggplot(stations, aes(x = station, y = mean)) +
+  geom_col()
+
+
+```
