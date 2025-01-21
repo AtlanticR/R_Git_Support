@@ -1,7 +1,7 @@
 ---
 title: "Asking for help"
 author: "Emily O'Grady"
-date: "`r Sys.Date()`"
+date: "January 22 2025"
 output: html_document
 ---
 
@@ -60,12 +60,13 @@ Particularly if you cannot share your data.
 
 ```{r}
 # generate a random dataframe
+# using rnorm or set.seed 
 df <- data.frame(
   x = rnorm(100),
   y = rnorm(100)
 )
 
-# grab an example dataset
+# grab an example dataset (built into R)
 data(mtcars)
 
 # grab an example oceanographic dataset
@@ -75,6 +76,7 @@ library(ocedata)
 # data()
 
 ```
+
 The next step in making a reproducible example is to isolate and simplify your code.
 This will help you identify the problem, and make it easier for someone else to help you.
 You should be including the code as well as your expected output, and the actual output.
@@ -83,10 +85,38 @@ You can also consider formatting the code within fences to make it easier to rea
 Make sure that you are including all the libraries you have used, and that the code is
 clearly commented.
 
+```{r eval = FALSE}
+# Let's try to tidy this up before we debug it
+
+data(secchi)
+data <- secchi
+
+data_2 <- data %>%
+  filter(depth < 10)
+
+data_3 <- data_2 %>%
+  group_by(latitude, longitude) %>%
+  summarise(mean_depth = mean(depth))
+
+mdi <- grep(colnames(data_3), 'mean_depth')
+
+data_3[mdi] <- round(data_3[mdi], 2)
+
+data_3$station <- 'HL_02'
+data_3$station[1000:4000] <- 'HL_03'
+data_3$station[4000:5939] <- 'HL_04'
+
+ggplot(data_3, aes(x = station, y = mean_depth)) +
+  geom_bar()
+
+```
+
 
 # Getting details
 
-Sometimes people will need more details to help you! Here are some things you can include:
+Sometimes people will need more details to help you! 
+Sometimes these details can help you as well.
+Here are some things you can use:
 
 - *sessionInfo()*
   This will show which version of R you are using, and which packages are loaded.
@@ -121,14 +151,16 @@ Sometimes people will need more details to help you! Here are some things you ca
   x = rnorm(100),
   y = rnorm(100)
 )
-
+sink('error_log.txt')
   for (i in seq_along(df$x)) {
     if (df$x[i] < 0) {
       print(paste('Value is less than zero! (i = ', i, ')'))
-      browser()
-    }
+      # browser()
+    } else{
     print(df$x[i])
+    }
   }
+sink()
 
 ```
 
