@@ -24,21 +24,21 @@ results.
 Where to go when you run into a problem? Here are some of the most popular platforms
 for asking for help:
 
-- Stack Overflow (https://stackoverflow.com/)
+- *Stack Overflow* (https://stackoverflow.com/)
   Usually the first thing to come up in your google searches. It is a forum for devlopers to ask
   and answer questions. It is a great resource for finding solutions to common problems.
   Use with some caution, as solutions may not always be the best practice and there may be nuances 
   to your problem, due to the security of your DFO laptop.
-- GitHub (https:://github.com)
+- *GitHub* (https:://github.com)
   A great place to find code and packages which may help with your work. On 
   individual packages, the 'issues' boards can be a great place to ask for
   help with a niche problem with a particular library.
-- AI (https:://m365.cloud.microsoft/chat)
+- *AI* (https:://m365.cloud.microsoft/chat)
   There are a number of AI tools which can help you debug your code. These are
   great for getting a quick solution to a problem, but may not always be the best
   practice. The recommended tool for DFO users is Bing AI (Copilot). Github copilot
   is also now available and can be used in most IDEs. 
-- DFO channels
+- *DFO channels*
   The Science PL community channel on Teams is active and a great place to go with 
   questions that may have specific DFO nuances, issues with our internal databases
   or other problems that involve coordination with IT. 
@@ -70,8 +70,8 @@ data(mtcars)
 
 # grab an example oceanographic dataset
 library(ocedata)
-?ocedata
-# challenge: find a dataset that could represent data used in your work
+# ?ocedata
+# CHALLENGE: find a dataset that could represent data used in your work
 # data()
 
 ```
@@ -79,16 +79,19 @@ The next step in making a reproducible example is to isolate and simplify your c
 This will help you identify the problem, and make it easier for someone else to help you.
 You should be including the code as well as your expected output, and the actual output.
 
+You can also consider formatting the code within fences to make it easier to read.
+Make sure that you are including all the libraries you have used, and that the code is
+clearly commented.
 
 
 # Getting details
 
-Sometime people will need more details to help you! Here are some things you can include:
+Sometimes people will need more details to help you! Here are some things you can include:
 
-- SessionInfo()
+- *sessionInfo()*
   This will show which version of R you are using, and which packages are loaded.
   
-- browser()
+- *browser()*
   This will pause your code at a certain point, and allow you to inspect the variables at that point.
   
   For example:
@@ -107,7 +110,7 @@ Sometime people will need more details to help you! Here are some things you can
   }
 ```
   
-- print statements and logs
+- *print statements and logs*
   You can use print statements to see what is happening at a certain point in your code.
   You can also write logs to a file, to see what is happening over time.
   
@@ -162,11 +165,11 @@ r for ecology: https://www.rforecology.com/post/the-essential-functions-of-r-che
 
 This code is not working. Can you help me debug it?
 
-The goal is to find locations which were samples more than twice and 
+The goal is to find locations which were sampled more than twice and 
 then generate a mean of all measurements for that station. We then want to plot
 only stations where the mean depth is greater than 5.
 
-```{r}
+```{r, eval = FALSE}
 library(tidyverse)
 data(secchi)
 
