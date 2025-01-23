@@ -71,9 +71,10 @@ data(mtcars)
 
 # grab an example oceanographic dataset
 library(ocedata)
+library(oce)
 # ?ocedata
 # CHALLENGE: find a dataset that could represent data used in your work
-# data()
+data(ctd)
 
 ```
 
@@ -87,27 +88,27 @@ clearly commented.
 
 ```{r eval = FALSE}
 # Let's try to tidy this up before we debug it
+library(tidyverse)
+library(ocedata)
 
 data(secchi)
 data <- secchi
 
-data_2 <- data %>%
-  filter(depth < 10)
-
-data_3 <- data_2 %>%
+data_means <- data %>%
+  filter(depth < 10) %>%
   group_by(latitude, longitude) %>%
-  summarise(mean_depth = mean(depth))
+  summarise(mean_depth = mean(depth)) %>%
+  mutate('mean_depth' = round(mean_depth, 2))
 
-mdi <- grep(colnames(data_3), 'mean_depth')
+# mdi <- grep(colnames(data_3), 'mean_depth')
+# data_3[mdi] <- round(data_3[mdi], 2)
 
-data_3[mdi] <- round(data_3[mdi], 2)
+data_means$station <- 'HL_02'
+data_means$station[1000:4000] <- 'HL_03'
+data_means$station[4000:5939] <- 'HL_04'
 
-data_3$station <- 'HL_02'
-data_3$station[1000:4000] <- 'HL_03'
-data_3$station[4000:5939] <- 'HL_04'
-
-ggplot(data_3, aes(x = station, y = mean_depth)) +
-  geom_bar()
+ggplot(data_means, aes(x = station, y = mean_depth)) +
+  geom_col()
 
 ```
 
@@ -132,7 +133,7 @@ Here are some things you can use:
   y = rnorm(100)
 )
 
-  for (i in seq_along(df$x)) {
+for (i in seq_along(df$x)) {
     if (df$x[i] < 0) {
       browser()
     }
@@ -154,13 +155,45 @@ Here are some things you can use:
 sink('error_log.txt')
   for (i in seq_along(df$x)) {
     if (df$x[i] < 0) {
-      print(paste('Value is less than zero! (i = ', i, ')'))
+      cat(paste('Value is less than zero! (i = ', i, ')'), '\n')
       # browser()
     } else{
-    print(df$x[i])
+    cat(df$x[i], '\n')
     }
   }
 sink()
+
+```
+
+
+# using reprex package
+
+```{r}
+# install.packages('reprex')
+library(reprex)
+
+# reprex will take your code and output, and format it into a markdown file
+# which you can then share with others
+reprex({
+  df <- data.frame(
+    x = rnorm(100),
+    y = rnorm(100)
+  )
+
+  for (i in seq_along(df$x)) {
+    if (df$x[i] < 0) {
+      browser()
+    }
+    print(df$x[i])
+  }
+})
+
+# you can also copy code and run reprex in the console
+# it will output an html file and keep the reprex on your clipboard
+# you can then paste it into a markdown file
+
+
+
 
 ```
 
@@ -203,23 +236,25 @@ only stations where the mean depth is greater than 5.
 
 ```{r, eval = FALSE}
 library(tidyverse)
+library(ocedata)
+
 data(secchi)
 
 # find locations which were sampled more than twice
 stations <- secchi %>%
-  group_by(c(latitude, longitude)) %>%
-  filter(n > 2) %>%
+  group_by(latitude, longitude) %>%
+  filter(n() > 2) %>%
   summarise(mean = mean(depth))
 
 # filter lat and lon data where the mean is greater than 5
-stations <- stations %>%
+stations_5 <- stations %>%
   filter(mean > 5)
 
 # name the stations with unique IDs
-stations$station <- seq_along(stations$latitude)
+stations_5$station <- seq_along(stations_5$latitude)
 
 # plot
-ggplot(stations, aes(x = station, y = mean)) +
+ggplot(stations_5, aes(x = station, y = mean)) +
   geom_col()
 
 
