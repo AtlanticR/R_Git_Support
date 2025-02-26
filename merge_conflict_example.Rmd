@@ -1,0 +1,108 @@
+---
+title: "Resolving Merge Conflicts in Git"
+author: "Emily OGrady"
+date: "2025-02-26"
+output: html_document
+---
+
+# Introduction
+
+In this document, we will discuss how to resolve merge conflicts in Git. Merge conflicts occur when changes from different branches conflict with each other and Git cannot automatically merge them. Understanding how to handle these conflicts is crucial for maintaining a smooth workflow.
+
+# What is a Merge Conflict?
+
+A merge conflict happens when Git encounters changes in the same part of a file from different branches. Git marks the conflicting areas and requires manual intervention to resolve the conflict.
+
+# Steps to Resolve Merge Conflicts
+
+1. **Identify the Conflict**: When you try to merge branches and a conflict occurs, Git will notify you.
+2. **Open the Conflicted File**: Open the file with conflicts in your text editor.
+3. **Locate Conflict Markers**: Git uses conflict markers to indicate the conflicting sections:
+    ```plaintext
+    <<<<<<< HEAD
+    Your changes
+    =======
+    Changes from the other branch
+    >>>>>>> branch-name
+    ```
+4. **Resolve the Conflict**: Edit the file to resolve the conflict. Keep the changes you want and remove the conflict markers.
+5. **Add the Resolved File**: Once resolved, add the file to the staging area using `git add <file>`.
+6. **Commit the Merge**: Commit the merge to complete the process using `git commit`.
+
+# Example
+
+Let's go through an example to illustrate the process.
+
+## Step 1: Create a Repository
+
+```
+git init merge-conflict-example
+cd merge-conflict-example
+```
+
+
+## Step 2: Create and Commit a File on the Main Branch
+
+```
+echo "print('This is the main branch.')" > example.R
+git add example.R
+git commit -m "Initial commit on main branch"
+```
+
+## Step 3: Create a New Branch and Make Changes
+
+```
+git checkout -b feature-branch
+echo "print('This is the feature branch.')" > example.R
+git add example.R
+git commit -m "Changes on feature branch"
+```
+
+## Step 4: Switch Back to Main Branch and Make Conflicting Changes
+
+```
+git checkout main
+echo "print('This is a conflicting change on the main branch.')" > example.R
+git add example.R
+git commit -m "Conflicting changes on main branch"
+```
+
+## Step 5: Merge the Feature Branch into Main
+
+```
+git merge feature-branch
+```
+
+At this point, Git will notify you of a merge conflict.
+
+## Step 6: Resolve the Conflict
+
+Open example.txt in your text editor. You will see something like this:
+
+```
+print("This is the main branch")
+<<<<<<< HEAD
+print("This is a conflicting change on the main branch")
+=======
+print("This is an update on the feature branch")
+>>>>>>> feature-branch
+```
+
+
+Edit the file to resolve the conflict:
+
+```
+print("This is the main branch with updates from the feature branch")
+```
+
+
+## Step 7: Add and Commit the Resolved File
+
+```
+git add example.R
+git commit -m "Resolved merge conflict between main and feature-branch"
+```
+
+## Conclusion
+
+Resolving merge conflicts is a common task when working with Git. By following the steps outlined above, you can effectively manage and resolve conflicts to maintain a smooth workflow.
