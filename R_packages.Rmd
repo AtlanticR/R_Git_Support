@@ -1,0 +1,118 @@
+---
+title: "Creating and Using R Packages for Marine Science"
+author: "Emily O'Grady"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Introduction
+
+Welcome to the session on creating and using R packages! Today, we'll explore how to create R packages for internal use, focusing on custom functions relevant to marine science.
+
+## Basics of R Functions
+
+### What is a Function?
+
+A function is a reusable piece of code that performs a specific task. Here's an example of a simple function to calculate salinity:
+
+```r
+calculate_salinity <- function(conductivity, temperature) {
+  # Example calculation
+  salinity <- conductivity / (1 + 0.02 * (temperature - 25))
+  return(salinity)
+}
+```
+
+Creating Custom Functions
+Let's create a function to calculate chlorophyll concentration:
+
+```r
+calculate_chlorophyll <- function(fluorescence) {
+  # Example calculation
+  chlorophyll <- fluorescence * 0.1
+  return(chlorophyll)
+}
+```
+
+Introduction to R Packages
+What is an R Package?
+An R package is a collection of functions, data, and documentation that can be easily shared and reused.
+
+Benefits of Using Packages
+Reusability: Use the same functions across multiple projects.
+Organization: Keep your code organized and maintainable.
+Sharing: Easily share your code with others.
+Creating a Simple R Package
+Setting Up
+Use the usethis and devtools packages to create a package structure:
+
+```r
+usethis::create_package("marineAnalysis")
+```
+
+Adding Functions
+Add your custom functions to the package:
+
+```r
+# In R/calculate_salinity.R
+calculate_salinity <- function(conductivity, temperature) {
+  salinity <- conductivity / (1 + 0.02 * (temperature - 25))
+  return(salinity)
+}
+
+# In R/calculate_chlorophyll.R
+calculate_chlorophyll <- function(fluorescence) {
+  chlorophyll <- fluorescence * 0.1
+  return(chlorophyll)
+}
+```
+
+Documentation
+Use roxygen2 to document your functions:
+
+```r
+#' Calculate Salinity
+#'
+#' @param conductivity Conductivity measurement
+#' @param temperature Temperature in degrees Celsius
+#' @return Salinity value
+#' @export
+calculate_salinity <- function(conductivity, temperature) {
+  salinity <- conductivity / (1 + 0.02 * (temperature - 25))
+  return(salinity)
+}
+
+```
+
+Building and Installing the Package
+Building the Package
+Build the package using devtools:
+
+```r
+devtools::build()
+```
+Installing the Package
+Install the package locally:
+
+```r
+devtools::install()
+```
+
+Sharing and Collaboration
+Version Control with Git
+Use Git for version control to track changes and collaborate with others.
+
+Sharing the Package
+Share the package within your team or organization using GitHub or other platforms.
+
+Downloading the Package from GitHub
+You can download and install the package from GitHub using the following command:
+
+```r
+devtools::install_github("yourusername/marineAnalysis")
+```
+
+Q&A and Wrap-Up
+Feel free to ask any questions and discuss the topics covered today. We encourage you to try creating your own packages and explore further resources.
+
+Thank you for participating!

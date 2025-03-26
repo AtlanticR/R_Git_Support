@@ -1,0 +1,141 @@
+---
+title: "README Best Practices"
+author: "Emily O'Grady"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+# Introduction to README Files
+
+A README file is the first thing people see when they visit your repository. It should provide a clear and concise overview of your project.
+
+## Why is a README Important?
+- **First Impression**: It sets the tone for your project.
+- **Documentation**: Provides essential information about the project.
+- **Guidance**: Helps users understand how to use and contribute to the project.
+
+# Creating a README
+
+```{r}
+# Create a new README file
+library(usethis)
+
+use_readme_md()
+
+```
+
+# Essential Components of a README
+
+## 1. Project Title
+- A clear and descriptive title.
+
+## 2. Project Description
+- A brief overview of what the project does.
+- Key features and functionalities.
+
+## 3. Installation Instructions
+- Step-by-step guide on how to install and set up the project.
+
+Usually looks something like this:
+
+```{r, eval=FALSE}
+# Install the package
+devtools::install_github("username/repo")
+```
+
+## 4. Usage
+- Examples of how to use the project.
+- Code snippets and commands.
+
+## 5. Contributing
+- Guidelines for contributing to the project.
+- Code of conduct.
+
+## 6. License
+- Information about the project's license.
+
+# Advanced Tips and Tricks
+
+## 1. Badges
+- Badges provide quick information about the project. Here are some examples:
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/tidyverse/dplyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EOGrady21/vprr/actions/workflows/r.yml)
+<!-- badges: end -->
+
+
+## 2. Images and Figures
+- Visuals can make your README more engaging.
+
+#### Example Figure
+![Example Figure](images/example.jfif)
+
+## 4. Links
+
+Include a link with a different title like 
+[GitHub](https://github.com/) 
+
+## 5. Code Snippets
+
+Include code snippets to demonstrate how to use your project.
+
+```r
+# Example R Code
+print("Hello, World!")
+```
+
+# Government of Canada Templates
+
+There is an open source code repo template, avaialble here:
+https://github.com/canada-ca/template-gabarit
+
+This provides valuable information and boilerplate documentation, including license information, and a contributing guide and code of conduct. 
+
+It is a GitHub 'Template' so you can use it to create a new repository.
+
+# Creating a README for your GitHub Profile
+
+1. Create a new repository with the same name as your GitHub username.
+
+2. Add a README.md file to the repository.
+
+3. Customize the README with information about yourself, your projects, and your interests.
+
+4. If you really want to show off! Check out these examples:
+
+    https://dev.to/github/10-standout-github-profile-readmes-h2o
+
+
+
+
+
+## Conclusion
+
+A well-crafted README is essential for any project. It provides users with the information they need to understand, use, and contribute to your project. By following these best practices, you can create a README that will make your project stand out.
+
+## Learn from the best!
+
+Here are some examples of great README files:
+
+Dan and Clark's oce package, with lots of figures and badges:
+
+https://github.com/dankelley/oce
+
+A scientific example, with lots of detail:
+
+https://github.com/csiro-fair/marimba
+
+An exaqmple of a README for a tool, with video:
+
+https://github.com/EuroGO-SHIP/AtlantOS_QC
+
+
+An exhaustive list:
+
+https://github.com/matiassingers/awesome-readme
+
+
+
+
+
