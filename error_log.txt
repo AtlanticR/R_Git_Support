@@ -1,0 +1,100 @@
+[1] 0.283774
+[1] 0.711442
+[1] "Value is less than zero! (i =  3 )"
+[1] "Value is less than zero! (i =  4 )"
+[1] "Value is less than zero! (i =  5 )"
+[1] "Value is less than zero! (i =  6 )"
+[1] "Value is less than zero! (i =  7 )"
+[1] "Value is less than zero! (i =  8 )"
+[1] "Value is less than zero! (i =  9 )"
+[1] 0.5383903
+[1] 2.072879
+[1] "Value is less than zero! (i =  12 )"
+[1] "Value is less than zero! (i =  13 )"
+[1] 0.5995272
+[1] "Value is less than zero! (i =  15 )"
+[1] "Value is less than zero! (i =  16 )"
+[1] "Value is less than zero! (i =  17 )"
+[1] 0.4153446
+[1] "Value is less than zero! (i =  19 )"
+[1] "Value is less than zero! (i =  20 )"
+[1] 0.09045521
+[1] "Value is less than zero! (i =  22 )"
+[1] "Value is less than zero! (i =  23 )"
+[1] 0.5469821
+[1] 1.441294
+[1] 0.3540976
+[1] "Value is less than zero! (i =  27 )"
+[1] 1.455816
+[1] "Value is less than zero! (i =  29 )"
+[1] "Value is less than zero! (i =  30 )"
+[1] 0.4588349
+[1] 0.05914176
+[1] "Value is less than zero! (i =  33 )"
+[1] 0.6655559
+[1] "Value is less than zero! (i =  35 )"
+[1] 0.6558554
+[1] 0.1842328
+[1] "Value is less than zero! (i =  38 )"
+[1] "Value is less than zero! (i =  39 )"
+[1] "Value is less than zero! (i =  40 )"
+[1] 0.181058
+[1] "Value is less than zero! (i =  42 )"
+[1] "Value is less than zero! (i =  43 )"
+[1] "Value is less than zero! (i =  44 )"
+[1] 0.1240326
+[1] 1.339718
+[1] 1.336603
+[1] "Value is less than zero! (i =  48 )"
+[1] 0.1567241
+[1] "Value is less than zero! (i =  50 )"
+[1] "Value is less than zero! (i =  51 )"
+[1] 0.2491522
+[1] 0.8694294
+[1] "Value is less than zero! (i =  54 )"
+[1] "Value is less than zero! (i =  55 )"
+[1] 0.3552903
+[1] 0.9255618
+[1] 0.2095912
+[1] 0.9546186
+[1] 0.6145988
+[1] 1.848677
+[1] "Value is less than zero! (i =  62 )"
+[1] 0.4947661
+[1] 0.2389079
+[1] "Value is less than zero! (i =  65 )"
+[1] 0.9909937
+[1] 0.2247211
+[1] 0.1635558
+[1] 1.005083
+[1] 0.3680547
+[1] 0.5028702
+[1] 0.6184844
+[1] "Value is less than zero! (i =  73 )"
+[1] "Value is less than zero! (i =  74 )"
+[1] "Value is less than zero! (i =  75 )"
+[1] 0.3389397
+[1] "Value is less than zero! (i =  77 )"
+[1] "Value is less than zero! (i =  78 )"
+[1] "Value is less than zero! (i =  79 )"
+[1] 0.5571476
+[1] "Value is less than zero! (i =  81 )"
+[1] 0.8849296
+[1] 0.0240861
+[1] 1.857064
+[1] "Value is less than zero! (i =  85 )"
+[1] "Value is less than zero! (i =  86 )"
+[1] "Value is less than zero! (i =  87 )"
+[1] 1.870297
+[1] "Value is less than zero! (i =  89 )"
+[1] 0.6625042
+[1] 0.5673753
+[1] "Value is less than zero! (i =  92 )"
+[1] "Value is less than zero! (i =  93 )"
+[1] 0.03017967
+[1] 1.08334
+[1] 0.5104263
+[1] 1.268087
+[1] 0.07543024
+[1] 0.8169048
+[1] 0.6852568
